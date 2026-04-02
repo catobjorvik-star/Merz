@@ -1,46 +1,60 @@
 <p align="center">
-  <img src="frontend/public/merz-logo.svg" width="220" />
+  <img src="frontend/public/merz-logo.svg" width="240" />
 </p>
 
 <p align="center">
-  <a href="https://merz.onrender.com/">https://merz.onrender.com/</a>
+  <a href="https://merz.onrender.com/">
+    <img src="https://img.shields.io/badge/🚀%20LIVE%20APP-merz.onrender.com-E30613?style=for-the-badge&logo=google-chrome&logoColor=white" />
+  </a>
 </p>
 
-<h1 align="center">PDF-EXCEL IMPORT</h1>
-
 <p align="center">
-  Schreinerei MERZ – Fensterimport Tool<br>
-  Entwickelt von CBjorvik
+  <b>Automatischer PDF → Excel Fensterimport für Schreinerei MERZ</b><br>
+  <sub>Entwickelt von CBjorvik</sub>
 </p>
 
 ---
 
-## Übersicht
-
-Diese Anwendung automatisiert die Übertragung von Fensterdaten aus Architekten-PDFs in die MERZ Excel-Kalkulationsvorlage.
-
-Sie ersetzt einen manuellen Workflow durch einen schnellen, zuverlässigen und wiederholbaren Prozess.
+<p align="center">
+  <img src="https://img.shields.io/badge/STATUS-PRODUCTION_READY-2ecc71?style=flat-square" />
+  <img src="https://img.shields.io/badge/FASTAPI-BACKEND-009688?style=flat-square&logo=fastapi" />
+  <img src="https://img.shields.io/badge/REACT-FRONTEND-61DAFB?style=flat-square&logo=react&logoColor=000" />
+  <img src="https://img.shields.io/badge/EXCEL-AUTOMATION-217346?style=flat-square&logo=microsoft-excel" />
+</p>
 
 ---
 
-## Hauptfunktionen
+## ✨ Überblick
 
-### PDF → Strukturierte Daten
+Diese Anwendung ersetzt einen **komplett manuellen Workflow** durch einen automatisierten Prozess:
+
+> 📄 Architekten-PDF → ⚙️ Datenextraktion → 📊 MERZ Excel → ✅ Fertige Kalkulation
+
+Ziel:
+- schneller arbeiten  
+- Fehler vermeiden  
+- konsistente Angebote erstellen  
+
+---
+
+## 🚀 Features
+
+### 📥 PDF → Strukturierte Fensterdaten
 - Unterstützt:
-  - Fensterlisten (Tabellen)
+  - klassische Fensterlisten (Tabellen)
   - Architektur-Fensterpläne
 - Erkennt automatisch:
-  - ID (z. B. F-1.6)
-  - Maße (RBM)
+  - Fenster-ID (z. B. `F-1.6`)
+  - Rohbaumaße (RBM)
   - Menge
   - Fenstertyp
   - Öffnungsrichtung (DIN rechts / links)
 
 ---
 
-### Intelligente Beschreibung
+### 🧠 Intelligente Beschreibung
 
-Beispiel:
+Automatisch generiert:
 
 ```text
 1,13×2,57 | Dreh-Kippflügel | DIN rechts, DIN links
