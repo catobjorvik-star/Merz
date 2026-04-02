@@ -1,11 +1,8 @@
 import { useMemo, useState } from "react";
 import { AlertTriangle, Download, Filter, Loader2, Upload, CheckCircle2 } from "lucide-react";
+import MerzAnimatedBanner from "./MerzAnimatedBanner";
 
 const API_BASE = "";
-
-function Tag({ children, tone = "dark" }) {
-  return <span className={`tag tag-${tone}`}>{children}</span>;
-}
 
 function FileDrop({ label, file, accept, onChange, icon }) {
   return (
@@ -36,7 +33,7 @@ function PreviewTable({ rows }) {
             <th>Menge</th>
             <th>Breite</th>
             <th>Höhe</th>
-            <th>Rohbauöffnung</th>
+            <th>Beschreibung</th>
             <th>Typ</th>
             <th>Raum</th>
             <th>Lieferantentyp</th>
@@ -49,13 +46,13 @@ function PreviewTable({ rows }) {
           {rows.map((row, idx) => (
             <tr key={`${row.id}-${idx}`}>
               <td>{row.id}</td>
-              <td>{row.house}</td>
+              <td>{row.house || "—"}</td>
               <td>{row.floor || "—"}</td>
               <td>{row.qty}</td>
               <td>{row.width_mm} mm</td>
               <td>{row.height_mm} mm</td>
               <td>{row.rohbau}</td>
-              <td>{row.type}</td>
+              <td>{row.type || "—"}</td>
               <td>{[row.room_no, row.room_name].filter(Boolean).join(" | ") || "—"}</td>
               <td>{row.supplier_type || "—"}</td>
               <td>{row.supplier_price_eur != null ? `${row.supplier_price_eur.toFixed(2)} €` : "—"}</td>
@@ -78,9 +75,10 @@ function MobilePreviewCards({ rows }) {
             <strong>{row.id}</strong>
             <span>{row.qty} Stk</span>
           </div>
+
           <div className="mobile-row-grid">
             <div>
-              <label>Rohbau</label>
+              <label>Beschreibung</label>
               <span>{row.rohbau}</span>
             </div>
             <div>
@@ -101,11 +99,17 @@ function MobilePreviewCards({ rows }) {
             </div>
             <div>
               <label>Preis / Glas</label>
-              <span>{row.supplier_price_eur != null ? `${row.supplier_price_eur.toFixed(2)} €` : "—"} · {row.glass_area_index_m2 != null ? `${row.glass_area_index_m2.toFixed(2)} m²` : "—"}</span>
+              <span>
+                {row.supplier_price_eur != null ? `${row.supplier_price_eur.toFixed(2)} €` : "—"} ·{" "}
+                {row.glass_area_index_m2 != null ? `${row.glass_area_index_m2.toFixed(2)} m²` : "—"}
+              </span>
             </div>
             <div>
               <label>Match</label>
-              <span>{row.supplier_confidence || "—"}{row.supplier_match_note ? ` | ${row.supplier_match_note}` : ""}</span>
+              <span>
+                {row.supplier_confidence || "—"}
+                {row.supplier_match_note ? ` | ${row.supplier_match_note}` : ""}
+              </span>
             </div>
           </div>
         </article>
@@ -130,6 +134,7 @@ export default function App() {
       setError("Bitte zuerst eine PDF-Fensterliste hochladen.");
       return;
     }
+
     setLoadingPreview(true);
     setStatus("PDF wird analysiert …");
     setError("");
@@ -143,10 +148,13 @@ export default function App() {
         method: "POST",
         body: formData,
       });
+
       const payload = await response.json();
+
       if (!response.ok) {
         throw new Error(payload.detail || "Vorschau konnte nicht erzeugt werden.");
       }
+
       setPreview(payload);
       setStatus(`Vorschau geladen: ${payload.count} Zeilen erkannt.`);
     } catch (err) {
@@ -162,6 +170,7 @@ export default function App() {
       setError("Bitte zuerst eine PDF-Fensterliste hochladen.");
       return;
     }
+
     setLoadingImport(true);
     setStatus("Excel-Datei wird erzeugt …");
     setError("");
@@ -174,10 +183,12 @@ export default function App() {
         method: "POST",
         body: formData,
       });
+
       if (!response.ok) {
         const payload = await response.json();
         throw new Error(payload.detail || "Import fehlgeschlagen.");
       }
+
       const blob = await response.blob();
       const disposition = response.headers.get("Content-Disposition") || "";
       const match = disposition.match(/filename="([^"]+)"/);
@@ -202,36 +213,7 @@ export default function App() {
 
   return (
     <div className="page-shell">
-      <div className="hero-card">
-        <div className="hero-topline">SCHREINEREI MERZ · FENSTERIMPORT</div>
-        <div className="hero-main">
-          <div className="hero-copy">
-            <img src="/merz-logo.svg" alt="Schreinerei Merz" className="hero-logo" />
-            <h1 className="hero-title-single">PDF-EXCEL IMPORT</h1>
-            <div className="hero-developed">Entwickelt von CBjorvik</div>
-            <div className="hero-tags">
-              <Tag>Nur PDF hochladen</Tag>
-              <Tag tone="red">Feste MERZ-Vorlage</Tag>
-              <Tag>Importbericht inklusive</Tag>
-            </div>
-          </div>
-
-          <div className="hero-panel">
-            <div className="mini-stat">
-              <span>Workflow</span>
-              <strong>PDF hochladen, Vorschau prüfen, Excel erzeugen</strong>
-            </div>
-            <div className="mini-stat">
-              <span>Vorlage</span>
-              <strong>MERZ-Kalkulationsvorlage liegt fest auf dem Server</strong>
-            </div>
-            <div className="mini-stat">
-              <span>Export</span>
-              <strong>Download als korrigierte XLSX-Datei</strong>
-            </div>
-          </div>
-        </div>
-      </div>
+      <MerzAnimatedBanner />
 
       <div className="content-grid single-card">
         <section className="panel">
@@ -255,6 +237,7 @@ export default function App() {
               {loadingPreview ? <Loader2 className="spin" size={18} /> : <Filter size={18} />}
               Vorschau laden
             </button>
+
             <button className="secondary-btn" onClick={createExcel} disabled={!canImport || loadingImport}>
               {loadingImport ? <Loader2 className="spin" size={18} /> : <Download size={18} />}
               Excel erzeugen
@@ -271,6 +254,7 @@ export default function App() {
               <span>{status}</span>
             </div>
           )}
+
           {error && (
             <div className="status error">
               <AlertTriangle size={18} />
@@ -298,6 +282,7 @@ export default function App() {
                 ))}
               </div>
             )}
+
             <PreviewTable rows={preview.rows} />
             <MobilePreviewCards rows={preview.rows} />
           </div>
@@ -313,6 +298,7 @@ export default function App() {
           {loadingPreview ? <Loader2 className="spin" size={18} /> : <Filter size={18} />}
           Vorschau
         </button>
+
         <button className="secondary-btn mobile-btn" onClick={createExcel} disabled={!canImport || loadingImport}>
           {loadingImport ? <Loader2 className="spin" size={18} /> : <Download size={18} />}
           Excel
