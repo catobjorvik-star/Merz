@@ -6,119 +6,37 @@
 
 <p align="center">
   Schreinerei MERZ – Fensterimport Tool<br>
-  Developed by CBjorvik
+  Entwickelt von CBjorvik
 </p>
 
 ---
 
-## Overview
+## Übersicht
 
-This application automates the transfer of window data from architect PDFs into the MERZ Excel calculation template.
+Diese Anwendung automatisiert die Übertragung von Fensterdaten aus Architekten-PDFs in die MERZ Excel-Kalkulationsvorlage.
 
-It replaces a manual workflow with a fast, reliable, and repeatable system.
-
----
-
-## Key Features
-
-### PDF → Structured Data
-- Supports:
-  - window tables
-  - architectural window plans
-- Extracts:
-  - ID (F-1.6, etc.)
-  - dimensions (RBM)
-  - quantity
-  - window type
-  - opening direction (DIN rechts / links)
+Sie ersetzt einen manuellen Workflow durch einen schnellen, zuverlässigen und wiederholbaren Prozess.
 
 ---
 
-### Smart Description Generation
+## Hauptfunktionen
 
-Example output:
+### PDF → Strukturierte Daten
+- Unterstützt:
+  - Fensterlisten (Tabellen)
+  - Architektur-Fensterpläne
+- Erkennt automatisch:
+  - ID (z. B. F-1.6)
+  - Maße (RBM)
+  - Menge
+  - Fenstertyp
+  - Öffnungsrichtung (DIN rechts / links)
+
+---
+
+### Intelligente Beschreibung
+
+Beispiel:
 
 ```text
 1,13×2,57 | Dreh-Kippflügel | DIN rechts, DIN links
-```
-
----
-
-### Supplier Price Integration
-- Uses internal supplier price list (PDF)
-- Applies:
-  - dimension correction (-30 mm rule)
-- Returns:
-  - price (€)
-  - glass area index (m²)
-  - match confidence
-
----
-
-### Excel Integration
-- Writes only into input columns (I–M)
-- Keeps formulas intact
-- Automatically extends table
-- Footer + calculations remain working
-
----
-
-### Built-in MERZ Template
-- No need to upload Excel template
-- Always uses correct version
-
----
-
-## Tech Stack
-
-Frontend:
-- React (Vite)
-
-Backend:
-- FastAPI
-- pdfplumber / PyPDF
-- openpyxl
-
-Deployment:
-- Docker
-- Render
-
----
-
-## Usage
-
-1. Upload PDF
-2. Click **Vorschau laden**
-3. Click **Excel erzeugen**
-4. Download finished file
-
----
-
-## Mobile Support
-
-- Auto-optimized for phones
-- Clean layout
-- Easy tap controls
-
----
-
-## Branding
-
-MERZ colors:
-- Red: `#E30613`
-- Dark: `#1E1E1E`
-- Light: `#F5F5F5`
-
----
-
-## Notes
-
-- Built for real MERZ workflow
-- Focus on reliability and simplicity
-- Not a generic tool
-
----
-
-## Author
-
-Developed by **CBjorvik**
