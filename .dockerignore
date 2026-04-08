@@ -1,5 +1,8 @@
-node_modules
-frontend/dist
-__pycache__
-*.pyc
-.git
+__init__.py
+main.py
+importer.py
+catalogue_router.py
+catalogue_service.py
+catalogue_snapshot.json
+project_router.py
+project_service.py
