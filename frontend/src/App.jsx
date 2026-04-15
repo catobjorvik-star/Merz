@@ -697,11 +697,6 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      <div className="app-atmosphere" aria-hidden="true">
-        <div className="atmosphere-glow atmosphere-glow-one" />
-        <div className="atmosphere-glow atmosphere-glow-two" />
-        <div className="atmosphere-line" />
-      </div>
       <ProjectModal open={projectModalOpen} onClose={() => setProjectModalOpen(false)} onCreate={createProject} />
 
       <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
@@ -770,7 +765,6 @@ export default function App() {
       </aside>
 
       <main className="main-area">
-        <div className="main-area-ambient" aria-hidden="true" />
         <header className="topbar premium-entrance">
           <button type="button" className="icon-button mobile-only" onClick={() => setSidebarOpen((current) => !current)}>
             <Menu size={18} />
