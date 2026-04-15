@@ -1,1 +1,3 @@
-\n\nexport default App;\n
+
+
+export default App;
