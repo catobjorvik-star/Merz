@@ -697,6 +697,11 @@ export default function App() {
 
   return (
     <div className="app-shell">
+      <div className="app-atmosphere" aria-hidden="true">
+        <div className="atmosphere-glow atmosphere-glow-one" />
+        <div className="atmosphere-glow atmosphere-glow-two" />
+        <div className="atmosphere-line" />
+      </div>
       <ProjectModal open={projectModalOpen} onClose={() => setProjectModalOpen(false)} onCreate={createProject} />
 
       <aside className={`sidebar ${sidebarOpen ? "open" : ""}`}>
@@ -765,7 +770,8 @@ export default function App() {
       </aside>
 
       <main className="main-area">
-        <header className="topbar">
+        <div className="main-area-ambient" aria-hidden="true" />
+        <header className="topbar premium-entrance">
           <button type="button" className="icon-button mobile-only" onClick={() => setSidebarOpen((current) => !current)}>
             <Menu size={18} />
           </button>
@@ -780,13 +786,14 @@ export default function App() {
         </header>
 
         <MerzAnimatedBanner
+          key={module}
           eyebrow={currentModuleMeta.kicker}
           title={currentModuleMeta.title}
           description={currentModuleMeta.description}
           chips={currentModuleMeta.chips}
         />
 
-        <section className="metric-row">
+        <section className="metric-row premium-entrance">
           <MetricTile label="Aktive Projekte" value={projects.length} detail="Verzeichnisbasierte Struktur" tone="dark" />
           <MetricTile
             label="Aktuelle Auswahl"
@@ -809,7 +816,7 @@ export default function App() {
         <StatusStrip status={status} error={error} />
 
         {module === "projects" ? (
-          <section className="module-grid projects-layout">
+          <section className="module-grid projects-layout module-entrance">
             <div className="surface-card project-list-card">
               <div className="surface-head">
                 <div>
@@ -947,7 +954,7 @@ export default function App() {
         ) : null}
 
         {module === "import" ? (
-          <section className="module-grid import-layout">
+          <section className="module-grid import-layout module-entrance">
             <div className="content-stack">
               <div className="surface-card">
                 <div className="surface-head">
@@ -1115,7 +1122,7 @@ export default function App() {
         ) : null}
 
         {module === "catalogue" ? (
-          <section className="module-grid catalogue-layout">
+          <section className="module-grid catalogue-layout module-entrance">
             <div className="surface-card">
               <div className="surface-head">
                 <div>
@@ -1277,7 +1284,7 @@ export default function App() {
         ) : null}
 
         {module === "queue" ? (
-          <section className="module-grid queue-layout">
+          <section className="module-grid queue-layout module-entrance">
             <div className="content-stack">
               <div className="surface-card">
                 <div className="surface-head">
