@@ -1,0 +1,1 @@
+\n\nexport default App;\n
