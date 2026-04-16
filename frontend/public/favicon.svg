@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-label="Merz">
+  <defs>
+    <linearGradient id="merzRed" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e31d24" />
+      <stop offset="100%" stop-color="#b90c12" />
+    </linearGradient>
+  </defs>
+  <rect x="16" y="16" width="224" height="224" rx="52" fill="#fff" />
+  <path d="M58 188V68h33l37 62 37-62h33v120h-31v-68l-31 52h-16l-31-52v68H58z" fill="url(#merzRed)" />
+</svg>
