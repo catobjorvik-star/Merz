@@ -24,7 +24,6 @@ import {
   X,
 } from "lucide-react";
 import MerzAnimatedBanner from "./MerzAnimatedBanner";
-import "./styles.css";
 
 const API_BASE = "";
 const PROJECT_FOLDERS = ["Fensterlisten", "Pläne", "Angebote", "Exports"];
